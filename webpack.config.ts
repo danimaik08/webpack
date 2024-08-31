@@ -19,7 +19,7 @@ export default (env: Env) => {
   const configuration: webpack.Configuration = {
     mode,
     devtool: isDev && 'inline-source-map',
-    entry: path.resolve(__dirname, 'src', 'index.ts'),
+    entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].[contenthash].js',
@@ -28,7 +28,7 @@ export default (env: Env) => {
     module: {
       rules: [
         {
-          test: /\.ts$/i,
+          test: /\.tsx?$/i,
           use: 'ts-loader',
           exclude: /node_modules/,
         },
@@ -40,7 +40,7 @@ export default (env: Env) => {
       ],
     },
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: ['.ts', '.tsx', '.js'],
       alias: {
         '~': path.resolve(__dirname, 'src'),
       },
@@ -54,6 +54,11 @@ export default (env: Env) => {
         'process.env.OK': true,
       }),
     ],
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
     devServer: {
       port,
     },
