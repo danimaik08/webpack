@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 type Options = {
   mode: 'development' | 'production';
-  rootDirectory: string;
+  html: string;
 };
 
 export default function buildPlugins(
@@ -14,7 +14,7 @@ export default function buildPlugins(
 
   return [
     new HtmlWebpackPlugin({
-      template: path.resolve(options.rootDirectory, 'public', 'index.html'),
+      template: options.html,
     }),
     isDev && new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({

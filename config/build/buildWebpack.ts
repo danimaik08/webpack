@@ -13,20 +13,25 @@ dotenv.config();
 type Options = {
   mode: 'development' | 'production';
   port: number;
-  rootDirectory: string;
+  paths: {
+    src: string;
+    html: string;
+    entry: string;
+    output: string;
+  };
 };
 
 export default (options: Options): webpack.Configuration => {
-  const { mode, rootDirectory } = options;
+  const { mode, paths } = options;
 
   const isDev = mode === 'development';
 
   const configuration: webpack.Configuration = {
     mode,
     devtool: isDev && 'inline-source-map',
-    entry: path.resolve(rootDirectory, 'src', 'index.tsx'),
+    entry: paths.entry,
     output: {
-      path: path.resolve(rootDirectory, 'dist'),
+      path: paths.output,
       filename: '[name].[contenthash].js',
       clean: true,
     },
@@ -36,8 +41,8 @@ export default (options: Options): webpack.Configuration => {
       },
     },
     module: buildLoaders(),
-    resolve: buildResolve(options),
-    plugins: buildPlugins(options),
+    resolve: buildResolve({ src: paths.src }),
+    plugins: buildPlugins({ mode, html: paths.html }),
     devServer: buildDevServer(options),
   };
 

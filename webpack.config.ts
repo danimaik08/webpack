@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import 'webpack-dev-server';
+import path from 'path';
 
 import buildWebpack from './config/build/buildWebpack';
 
@@ -12,7 +13,12 @@ export default (env: Env): webpack.Configuration => {
   const configuration: webpack.Configuration = buildWebpack({
     mode: env.mode ?? 'development',
     port: +(env.port ?? 3000),
-    rootDirectory: __dirname,
+    paths: {
+      entry: path.resolve(__dirname, 'src', 'index.tsx'),
+      output: path.resolve(__dirname, 'dist'),
+      src: path.resolve(__dirname, 'src'),
+      html: path.resolve(__dirname, 'public', 'index.html'),
+    },
   });
 
   return configuration;

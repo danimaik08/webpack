@@ -1,8 +1,7 @@
-import path from 'path';
 import webpack from 'webpack';
 
 type Options = {
-  rootDirectory: string;
+  src: string;
 };
 
 export default function buildResolve(
@@ -11,7 +10,7 @@ export default function buildResolve(
   return {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
-      '~': path.resolve(options.rootDirectory, 'src'),
+      '~': options.src,
     },
   };
 }
