@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import dotenv from 'dotenv';
@@ -14,11 +15,10 @@ const port = 3000;
 export default (env: Env) => {
   const mode = env.mode ?? 'development';
   const isDev = mode === 'development';
-  const isProd = mode === 'production';
 
-  return {
+  const configuration: webpack.Configuration = {
     mode,
-    devtool: !isProd && 'inline-source-map',
+    devtool: isDev && 'inline-source-map',
     entry: path.resolve(__dirname, 'src', 'index.ts'),
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -58,4 +58,6 @@ export default (env: Env) => {
       port,
     },
   };
+
+  return configuration;
 };
