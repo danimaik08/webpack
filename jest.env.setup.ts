@@ -1,5 +1,3 @@
-import '@testing-library/jest-dom';
-
 const envText = require('fs').readFileSync('.env.test', 'utf8');
 
 const parsedEnv = envText.split('\n').reduce((acc: object, str: string) => {
