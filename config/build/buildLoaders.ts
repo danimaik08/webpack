@@ -1,9 +1,20 @@
 import webpack from 'webpack';
 
-export default function buildLoaders(): webpack.Configuration['module'] {
+type Options = {
+  mode: 'development' | 'production';
+};
+
+export default function buildLoaders(
+  options: Options
+): webpack.Configuration['module'] {
+  const isDev = options.mode === 'development';
+
   const tsLoader = {
     test: /\.tsx?$/i,
-    use: 'ts-loader',
+    loader: 'ts-loader',
+    options: {
+      transpileOnly: !isDev,
+    },
     exclude: /node_modules/,
   };
 

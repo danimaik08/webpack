@@ -40,10 +40,10 @@ export default (options: Options): webpack.Configuration => {
         chunks: 'all',
       },
     },
-    module: buildLoaders(),
+    module: buildLoaders({ mode }),
     resolve: buildResolve({ src: paths.src }),
     plugins: buildPlugins({ mode, html: paths.html }),
-    devServer: buildDevServer(options),
+    devServer: buildDevServer({ port: options.port }),
   };
 
   return configuration;
