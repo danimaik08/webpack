@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import * as Helper from './helper';
 
@@ -25,5 +26,6 @@ export default function buildPlugins(
       'process.env.OK': true,
     }),
     useBundleAnalyzer && new WebpackBundleAnalyzer.BundleAnalyzerPlugin(),
-  ];
+    isDev && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean);
 }

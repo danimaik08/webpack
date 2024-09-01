@@ -15,6 +15,7 @@
   "author": "Daniil Maikovskii",
   "license": "ISC",
   "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.15",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.5.0",
     "@testing-library/react": "16.0.1",
@@ -31,6 +32,8 @@
     "html-webpack-plugin": "5.6.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
+    "react-refresh": "0.14.2",
+    "react-refresh-typescript": "2.0.9",
     "style-loader": "4.0.0",
     "ts-jest": "29.2.5",
     "ts-loader": "9.5.1",

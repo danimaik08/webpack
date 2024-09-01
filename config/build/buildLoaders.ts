@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import ReactRefreshTypeScript from 'react-refresh-typescript';
 
 type Options = {
   mode: 'development' | 'production';
@@ -13,6 +14,9 @@ export default function buildLoaders(
     test: /\.tsx?$/i,
     loader: 'ts-loader',
     options: {
+      getCustomTransformers: () => ({
+        before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+      }),
       transpileOnly: !isDev,
     },
     exclude: /node_modules/,
