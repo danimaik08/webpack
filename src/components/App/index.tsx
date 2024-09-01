@@ -6,7 +6,6 @@ export default function App() {
 
   return (
     <div data-testid="App">
-      <Outlet />
       <div>
         <div>
           <Link to="/about">about</Link>
@@ -33,6 +32,7 @@ export default function App() {
           -
         </button>
       </div>
+      <Outlet />
     </div>
   );
 }

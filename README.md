@@ -11,3 +11,7 @@
 ## test
 
 `npm run test`
+
+## BundleAnalyzer
+
+add `USE_BUNDLE_ANALYZER = true` into your .env to use it

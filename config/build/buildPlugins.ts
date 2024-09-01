@@ -1,6 +1,8 @@
 import webpack from 'webpack';
-import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackBundleAnalyzer from 'webpack-bundle-analyzer';
+
+import * as Helper from './helper';
 
 type Options = {
   mode: 'development' | 'production';
@@ -12,6 +14,8 @@ export default function buildPlugins(
 ): webpack.Configuration['plugins'] {
   const isDev = options.mode === 'development';
 
+  const useBundleAnalyzer = Helper.calculateUseBundleAnalyzerFlag();
+
   return [
     new HtmlWebpackPlugin({
       template: options.html,
@@ -20,5 +24,6 @@ export default function buildPlugins(
     new webpack.DefinePlugin({
       'process.env.OK': true,
     }),
+    useBundleAnalyzer && new WebpackBundleAnalyzer.BundleAnalyzerPlugin(),
   ];
 }
