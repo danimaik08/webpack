@@ -28,7 +28,13 @@ export default function buildLoaders(
     exclude: /node_modules/,
   };
 
+  const svgLoader = {
+    test: /\.svg$/i,
+    use: ['@svgr/webpack'],
+    exclude: /node_modules/,
+  };
+
   return {
-    rules: [tsLoader, cssLoader],
+    rules: [tsLoader, cssLoader, svgLoader],
   };
 }

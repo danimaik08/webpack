@@ -23,7 +23,7 @@ export default function buildPlugins(
     }),
     isDev && new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
-      'process.env.OK': true,
+      'process.env': JSON.stringify(process.env),
     }),
     useBundleAnalyzer && new WebpackBundleAnalyzer.BundleAnalyzerPlugin(),
     isDev && new ReactRefreshWebpackPlugin(),

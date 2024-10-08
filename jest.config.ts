@@ -10,4 +10,8 @@ export default {
     '<rootDir>/jest.libs.setup.ts',
     '<rootDir>/jest.env.setup.ts',
   ],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.svg$': '<rootDir>/jest.svg.js',
+  },
 };
