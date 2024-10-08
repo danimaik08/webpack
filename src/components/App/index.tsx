@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Header = styled.h1`
+  color: #00f;
+`;
 
 export default function App() {
   const [count, setCount] = useState(0);
@@ -14,7 +19,7 @@ export default function App() {
           <Link to="/shop">shop</Link>
         </div>
       </div>
-      <h1 style={{ color: '#00f' }}>React</h1>
+      <Header>React</Header>
       <div style={{ display: 'flex', gap: 8 }}>
         <div>Counter: {count}</div>
         <button
