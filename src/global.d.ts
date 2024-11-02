@@ -5,3 +5,15 @@ declare module '*.svg' {
 
   export default ReactComponent;
 }
+
+declare module '*.png' {
+  const value: string;
+
+  export default value;
+}
+
+declare module '*.jpe?g' {
+  const value: string;
+
+  export default value;
+}

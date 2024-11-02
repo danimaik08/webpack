@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
+import PostcssCustomProperties from 'postcss-custom-properties';
 
 type Options = {
   mode: 'development' | 'production';
@@ -24,7 +25,23 @@ export default function buildLoaders(
 
   const cssLoader = {
     test: /\.css$/i,
-    use: ['style-loader', 'css-loader'],
+    use: [
+      'style-loader',
+      { loader: 'css-loader', options: { importLoaders: 1 } },
+      {
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            plugins: [PostcssCustomProperties()],
+          },
+        },
+      },
+    ],
+  };
+
+  const scssLoader = {
+    test: /\.scss$/i,
+    use: ['style-loader', 'css-loader', 'sass-loader'],
     exclude: /node_modules/,
   };
 
@@ -34,7 +51,19 @@ export default function buildLoaders(
     exclude: /node_modules/,
   };
 
+  const pngLoader = {
+    test: /\.png$/i,
+    type: 'asset/resource',
+    exclude: /node_modules/,
+  };
+
+  const jpgLoader = {
+    test: /\.jpe?g/i,
+    type: 'asset/resource',
+    exclude: /node_modules/,
+  };
+
   return {
-    rules: [tsLoader, cssLoader, svgLoader],
+    rules: [tsLoader, cssLoader, scssLoader, svgLoader, pngLoader, jpgLoader],
   };
 }
